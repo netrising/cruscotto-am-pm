@@ -1,0 +1,213 @@
+{
+  "clients": [
+    {
+      "name": "Tubò / Aertecnica",
+      "count": 225,
+      "domain": 87,
+      "subjects": 60,
+      "calendar": 46
+    },
+    {
+      "name": "Malaguti / Cangeo",
+      "count": 192,
+      "domain": 64,
+      "subjects": 70,
+      "calendar": 35
+    },
+    {
+      "name": "Ser.mac",
+      "count": 169,
+      "domain": 65,
+      "subjects": 33,
+      "calendar": 14
+    },
+    {
+      "name": "F.lli Vitali",
+      "count": 152,
+      "domain": 59,
+      "subjects": 51,
+      "calendar": 23
+    },
+    {
+      "name": "Pianeta Sicurezza",
+      "count": 144,
+      "domain": 58,
+      "subjects": 40,
+      "calendar": 25
+    },
+    {
+      "name": "F.lli Righini",
+      "count": 127,
+      "domain": 58,
+      "subjects": 38,
+      "calendar": 7
+    },
+    {
+      "name": "Aran",
+      "count": 65,
+      "domain": 21,
+      "subjects": 26,
+      "calendar": 2
+    },
+    {
+      "name": "Riati",
+      "count": 22,
+      "domain": 2,
+      "subjects": 16,
+      "calendar": 2
+    },
+    {
+      "name": "VIP Riccione",
+      "count": 10,
+      "domain": 8,
+      "subjects": 5,
+      "calendar": 0
+    },
+    {
+      "name": "Shuttle Italy Airport",
+      "count": 2,
+      "domain": 2,
+      "subjects": 1,
+      "calendar": 0
+    }
+  ],
+  "requests": [
+    {
+      "key": "r2120881225",
+      "client": "Malaguti / Cangeo",
+      "title": "Aggiornare ordine prodotti nel menu e nella pagina prodotti",
+      "status": "Da verificare con ClickUp",
+      "note": "26/10: richiesta esplicita di David Ruscelli.",
+      "date": "2026-10-26 13:03:40",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG23SFNAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r3004914557",
+      "client": "Malaguti / Cangeo",
+      "title": "Aggiungere descrizione al Toorx 140",
+      "status": "Da verificare con ClickUp",
+      "note": "Aggiungere «trincia a dischi per macchine frontali».",
+      "date": "2026-10-26 13:03:40",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG23SFNAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r744885042",
+      "client": "Pianeta Sicurezza",
+      "title": "Modificare grafica reel PES PAV PEI e calendario corsi",
+      "status": "Da verificare con ClickUp",
+      "note": "Richiesta del 26/10 sul post del 27/10 e sui corsi Fonarcom.",
+      "date": "2026-10-26 11:16:01",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG23SFBAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r2246798339",
+      "client": "Pianeta Sicurezza",
+      "title": "Confermare contenuti e tempi dello shooting del 6 novembre",
+      "status": "Sollecito cliente",
+      "note": "Il 26/10 il cliente chiede aggiornamenti.",
+      "date": "2026-10-26 12:10:32",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG23SFFAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r2042167814",
+      "client": "F.lli Righini",
+      "title": "Aggiornare contenuti e impaginazione della brochure",
+      "status": "Da verificare con ClickUp",
+      "note": "Email del 23/10: integrazione carriponte e revisione sfondo.",
+      "date": "2026-10-23 17:02:12",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG1mhgvAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r3452324699",
+      "client": "F.lli Righini",
+      "title": "Verificare keyword progetti, ricerca e proposte sostenibilità",
+      "status": "Da verificare con ClickUp",
+      "note": "Richiesti check keyword, pulsante cerca e due proposte.",
+      "date": "2026-10-06 11:56:04",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAGobrtiAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r1278570935",
+      "client": "Ser.mac",
+      "title": "Raccogliere paesi e festività per i calendari 2027",
+      "status": "In attesa di materiale cliente nell’email",
+      "note": "Lista attesa prima di procedere anche con le traduzioni.",
+      "date": "2026-10-23 17:13:33",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAF3tBQAAA28OJvKZD%2FQZmx6XN6rgR4AAG23eGuAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r3256683867",
+      "client": "Tubò / Aertecnica",
+      "title": "Allineare brief influencer per il lancio Robò",
+      "status": "Da verificare con ClickUp",
+      "note": "Appunti inviati dal cliente. Allegato da leggere per dettagliare i task.",
+      "date": "2026-10-23 09:28:53",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AACz08WMAAA28OJvKZD%2FQZmx6XN6rgR4AAG1mjf0AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r3404337860",
+      "client": "Aran",
+      "title": "Procedere con i materiali disponibili per la promo LG",
+      "status": "Da verificare con ClickUp",
+      "note": "Pietro chiede di procedere senza attendere LG.",
+      "date": "2026-10-13 10:06:13",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAF3tBPAAA28OJvKZD%2FQZmx6XN6rgR4AAGuqXHxAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": false
+    },
+    {
+      "key": "r3296608786",
+      "client": "Tubò / Aertecnica",
+      "title": "Intervento nuova etichetta Pipedrive",
+      "status": "Non procedere secondo email cliente",
+      "note": "Il cliente rifiuta la proposta e preferisce gestione manuale.",
+      "date": "2026-10-21 10:50:04",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAAAAEMAAA28OJvKZD%2FQZmx6XN6rgR4AAG0BPt5AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": true
+    },
+    {
+      "key": "r3233523392",
+      "client": "Riati",
+      "title": "Articolo blog ottobre",
+      "status": "Pubblicato secondo email",
+      "note": "Conferma di pubblicazione ricevuta. Non riproporre come nuovo task.",
+      "date": "2026-10-19 17:04:57",
+      "url": "https://outlook.office365.com/owa/?ItemID=AAMkADliYzhmOGM2LTU5NGUtNGUwMy05NTdmLTU2MzczMjc4MWRlZQBGAAAAAABZzCebX4PlSZf%2FPgFehlerBwA28OJvKZD%2FQZmx6XN6rgR4AAAF3tBSAAA28OJvKZD%2FQZmx6XN6rgR4AAGzn%2FTgAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+      "channel": "Email",
+      "blocked": true
+    }
+  ],
+  "provenance": {
+    "kind": "mailbox_analysis",
+    "period": "26 luglio–26 ottobre 2026",
+    "importedAt": "2026-10-26",
+    "completeTaskExtraction": false,
+    "cutoffUTC": "2026-10-26T16:03:57Z",
+    "totalRows": 2014,
+    "groups": {
+      "empty": 292,
+      "sent": 167,
+      "client": 1108,
+      "bounce": 14,
+      "internal": 111,
+      "other": 322
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "project_id": "appgprj_6adf641ad4f48191a212c64d07b91b82",
+  "commit": "85d87c77309a61cd0d079d1f263dbfe3f23aa003",
+  "source": "Repository associato al progetto Sites, aggiornato dal source helper in modalità apertura",
+  "application_source_modified": false,
+  "site_published": false,
+  "source_file_count": 42,
+  "export_additions": [
+    "README.md (originale conservato in docs/README-progetto-originale.md)",
+    "package-lock.json (grafo vuoto, v3)",
+    ".env.example",
+    "scripts/check-all.mjs",
+    "SOURCE.json",
+    "SOURCE-FILES-SHA256.json"
+  ]
+}

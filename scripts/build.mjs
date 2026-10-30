@@ -1,0 +1,15 @@
+import {normalizeClientRecord,mergeClientRows} from '../worker/shared.js';
+import {readFile,mkdir,writeFile,rm} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const read=path=>readFile(new URL(path,root),'utf8');
+const [runtime,template,client,baseline,analysis,unassigned,shared,sync,workflow,reviews,brand,brands,insights,resourceMath,resources,resourceClient,whatsapp,feed,manifest]=await Promise.all(['worker/index.js','worker/page.html','worker/client.js','worker/baseline.json','worker/analysis.json','worker/unassigned.json','worker/shared.js','worker/sync.js','worker/workflow.js','worker/reviews.js','worker/brand.css','worker/client-brands.json','worker/clients.js','worker/resource-math.js','worker/resources.js','worker/resource-client.js','worker/whatsapp.js','worker/feed.js','.openai/hosting.json'].map(read));
+const groupedBaseline=JSON.parse(baseline);groupedBaseline.clients=mergeClientRows(groupedBaseline.clients);groupedBaseline.requests=groupedBaseline.requests.map(normalizeClientRecord);const groupedAnalysis=JSON.parse(analysis);groupedAnalysis.messages=groupedAnalysis.messages.map(normalizeClientRecord);
+const helpers=(shared+'\n'+workflow).replace(/^import .*$/gm,'').replace(/^export /gm,'');
+const brandedClient=client.replace('/* CLIENT_BRANDS */ {}',()=>JSON.stringify(JSON.parse(brands)));
+const page=template.replace('/* BRAND */',()=>brand).replace('/* CLIENT */',()=>(helpers+'\n'+feed.replace(/^export /gm,'')+'\n'+brandedClient+'\n'+resourceClient).replace(/<\/script/gi,'<\\/script'));
+const config=JSON.parse(manifest);if(config.project_id!=='appgprj_6adf641ad4f48191a212c64d07b91b82'||config.static)throw Error('Invalid Site identity or Worker configuration');
+await rm(new URL('dist/',root),{recursive:true,force:true});
+await mkdir(new URL('dist/server/',root),{recursive:true});await mkdir(new URL('dist/.openai/',root),{recursive:true});
+await writeFile(new URL('dist/server/index.js',root),runtime.replace('/* SHARED */',()=>helpers+'\n'+insights.replace(/^import .*$/gm,'').replace(/^export /gm,'')+'\n'+resourceMath.replace(/^import .*$/gm,'').replace(/^export /gm,'')+'\n'+resources+'\n'+whatsapp).replace('/* SYNC */',()=>sync.replace(/^export /gm,'')+'\n'+reviews.replace(/^export /gm,'')).replace('/* BASELINE */ null',()=>JSON.stringify(groupedBaseline)).replace('/* ANALYSIS */ null',()=>JSON.stringify(groupedAnalysis)).replace('/* UNASSIGNED */ null',()=>JSON.stringify(JSON.parse(unassigned).map(normalizeClientRecord))).replace("/* PAGE */ ''",()=>JSON.stringify(page)));
+await writeFile(new URL('dist/.openai/hosting.json',root),manifest);
+console.log('Account Hub Worker built; Site identity preserved.');

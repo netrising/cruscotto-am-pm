@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS hub_whatsapp_chats (owner TEXT NOT NULL, chat_key TEXT NOT NULL, source_id TEXT NOT NULL, name TEXT NOT NULL, client TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0, checked_at TEXT NOT NULL, PRIMARY KEY(owner,chat_key));
+CREATE TABLE IF NOT EXISTS hub_whatsapp_messages (owner TEXT NOT NULL, chat_key TEXT NOT NULL, message_id TEXT NOT NULL, received_at TEXT NOT NULL, direction TEXT NOT NULL, payload TEXT NOT NULL, expires_at INTEGER, PRIMARY KEY(owner,chat_key,message_id));
+CREATE TABLE IF NOT EXISTS hub_whatsapp_imports (owner TEXT NOT NULL, import_id TEXT NOT NULL, checked_at TEXT NOT NULL, conversations INTEGER NOT NULL, added INTEGER NOT NULL, changed INTEGER NOT NULL, requests INTEGER NOT NULL, PRIMARY KEY(owner,import_id));

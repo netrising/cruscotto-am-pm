@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {aggregateResourceWeek,resourceWeekBounds,resourceMonday} from '../worker/resource-math.js';
+import worker from '../dist/server/index.js';
+import {localDB} from './local-db.mjs';
+const week='2026-10-19',now='2026-10-27T10:00:00Z';
+const entry=(id,date,hours=7.25,task='own')=>({id,start:String(Date.parse(date+'T07:00:00Z')),end:String(Date.parse(date+'T07:00:00Z')+hours*3600000),duration_ms:hours*3600000,user:{id:101},task:{id:task,name:'Task '+task},description:''});
+const aggregate=(entries,extra={})=>aggregateResourceWeek({week,entries,now,...extra});
+assert.equal(resourceMonday('2026-10-27'),'2026-10-26');assert.equal(resourceWeekBounds(week).to-resourceWeekBounds(week).from,169*3600000);
+assert.equal(aggregate([entry('exact','2026-10-19')]).days[0].status,'ok');assert.equal(aggregate([entry('under','2026-10-19',7.25-1/3600)]).days[0].status,'short');assert.equal(aggregate([]).days[0].status,'unknown');assert.equal(aggregate([],{overrides:[{day:week,presence:'present',target_minutes:435}]}).days[0].status,'short');
+const today=aggregateResourceWeek({week:'2026-10-26',entries:[],now});assert.equal(today.days[1].status,'today');assert.equal(today.days[2].status,'future');assert.equal(today.days[5].status,'off');
+const repeated=entry('same','2026-10-19');assert.equal(aggregate([repeated,repeated]).totalMs,7.25*3600000);
+const other=entry('other','2026-10-20',1,'other-pm');const all=aggregate([repeated,other],{ourTaskIds:['own']});assert.equal(all.totalMs,8.25*3600000);assert.equal(all.ourMs,7.25*3600000);
+const overlapping=aggregate([entry('a','2026-10-19',4),entry('b','2026-10-19',4)]);assert.equal(overlapping.days[0].status,'review');assert(overlapping.days[0].warnings.length);
+const running={...repeated,id:'running',end:null,duration_ms:-1};assert.equal(aggregate([running]).runningEntries,1);assert.equal(aggregate([running]).totalMs,0);
+const cross={id:'night',start:String(Date.parse('2026-10-19T21:30:00Z')),end:String(Date.parse('2026-10-19T23:30:00Z')),duration_ms:7200000,task:{id:'night',name:'Night'}};const split=aggregate([cross]);assert.equal(split.days[0].loggedMs,1800000);assert.equal(split.days[1].loggedMs,5400000);
+const hr={id:'leave',status:'approvata',start_date:String(Date.parse('2026-10-18T22:00:00Z')),due_date:String(Date.parse('2026-10-18T22:00:00Z')),time_estimate:8*3600000,url:'https://app.clickup.com/t/leave'};
+assert.equal(aggregate([],{absences:[hr]}).days[0].status,'absent');assert.equal(aggregate([repeated],{absences:[hr]}).days[0].status,'review');assert.equal(aggregate([],{absences:[{...hr,time_estimate:2*3600000}]}).days[0].status,'review');assert.equal(aggregate([],{absences:[{...hr,status:'richiesta'}]}).days[0].status,'unknown');assert.equal(aggregate([entry('p','2026-10-19',5.25)],{absences:[{...hr,time_estimate:2*3600000}],overrides:[{day:week,presence:'partial',target_minutes:315}]}).days[0].status,'ok');
+const DB=await localDB();let writes=0,timeReads=0;const seenActions=[];
+const context={props:{CONNECTORS:{async invoke(c,action,args){seenActions.push(action);if(/create|update|add_time|delete/.test(action)){writes++;throw Error('Provider write forbidden in this test')}
+ const success=d=>({status:'success',result:{structuredContent:d}});
+ if(action==='clickup_get_user')return success({id:7,username:'Giulia',email:'g.balzi@netrising.com',timezone:'Europe/Rome',current_time:'2026-10-27T11:00:00+01:00',current_time_utc:now});
+ if(action==='clickup_get_workspace_members')return success({members:[{id:7,name:'Giulia'},{id:101,name:'Alice'},{id:102,name:'Bob'}]});
+ if(action==='clickup_search')return success({results:[{id:args.cursor?'two':'one',type:'task',name:'Own task',url:'https://app.clickup.com/t/own',assignees:[{id:101},{id:7}]}],next_cursor:args.cursor?null:'page-two'});
+ if(action==='clickup_get_time_entries'){timeReads++;assert.deepEqual(args.assignee,['101']);assert(!args.task_id);return success({entries:[repeated,other],summary:{total_entries:2}})}
+ if(action==='clickup_filter_tasks')return success({tasks:[],has_more:false,next_page:null});throw Error('Unexpected action '+action);
+}}}};
+const call=async(path,args={},owner='owner-a')=>{const response=await worker.fetch(new Request('https://hub.test/api/resources-'+path,{method:'POST',headers:{Origin:'https://hub.test','Content-Type':'application/json',...(owner?{'oai-authenticated-user-id':owner}:{})},body:JSON.stringify(args)}),{DB},context);return {code:response.status,body:await response.json()}};
+assert.equal((await call('context')).body.resources.length,0);assert.equal((await call('discover')).body.more,true);assert.equal((await call('discover')).body.more,false);assert.equal((await call('context')).body.resources[0].sourceCount,2);assert.equal((await call('context')).body.resources.length,1);
+assert.equal((await call('week',{id:'101',week})).body.totalMs,8.25*3600000);assert.equal((await call('week',{id:'101',week})).body.cached,true);assert.equal(timeReads,1);
+assert.equal((await call('day',{id:'101',day:week,presence:'partial',target_minutes:300})).code,200);assert.equal((await call('week',{id:'101',week})).body.days[0].targetMinutes,300);assert.equal((await call('day',{id:'101',day:week,presence:'auto'})).code,200);
+assert.equal((await call('profile',{id:'101',included:true,shared:true})).body.resources[0].shared,true);assert.equal((await call('discover', {reset:true})).body.resources[0].shared,true);
+assert.equal((await call('week',{id:'101',week},'owner-b')).code,503);assert.equal((await call('context',{},'owner-b')).body.resources.length,0);assert.equal((await call('context',{},null)).code,401);assert.equal((await call('week',{id:'102',week})).code,503);assert.equal((await call('day',{id:'101',day:'not-a-day',presence:'present'})).code,400);assert.equal((await call('day',{id:'101',day:week,presence:'partial'})).code,400);
+assert.equal(writes,0);DB.sqlite.close();console.log('Verified resource discovery pagination and sources, shared profiles, all-task weekly logs, exact 7:15 threshold, DST/midnight splits, deduplication, open timers, overlaps, approved/full/partial leave, pending leave, unknown attendance, current/future days, manual exceptions, cache and owner isolation. No ClickUp writes.');
